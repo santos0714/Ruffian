@@ -1,0 +1,1396 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" href="assets/brand/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta property="og:image" content="assets/brand/og-rufian.jpg">
+<meta name="theme-color" content="#FFFEFC">
+<title>Rufián Coffee Room</title>
+<meta name="description" content="Rufián Coffee Room: cafetería de especialidad en Ensenada, Baja California. Café de Finca Santa Cruz (Chiapas) tostado en Rufián Roastery, bebidas de autor y menú completo.">
+<meta property="og:title" content="Rufián Coffee Room · Café de especialidad en Ensenada">
+<meta property="og:description" content="No es una cafetería, es un refugio para los que buscan su café y su lugar. Blvd. Zertuche, Ensenada, B.C.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Gluten:wght@500;700;800;900&family=Caveat:wght@400;500;600;700&family=Pacifico&display=swap">
+
+<!-- Datos estructurados: dirección, teléfono y horario tomados del perfil de Google del negocio (28 oct 2026). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Rufián Coffee Room",
+  "servesCuisine": "Café de especialidad",
+  "telephone": "+52 646 546 7337",
+  "openingHours": ["Mo-Fr 06:30-21:00", "Sa-Su 07:30-21:00"],
+  "hasMap": "https://maps.app.goo.gl/EfJeykhSRJ7fuKdB7",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Blvd. Gral. Juan Zertuche 453, Valle Dorado",
+    "addressLocality": "Ensenada",
+    "addressRegion": "B.C.",
+    "postalCode": "22890",
+    "addressCountry": "MX"
+  },
+  "sameAs": ["https://www.instagram.com/rufiancoffeeroom/"]
+}
+</script>
+
+<script>
+/* Aplica el tema elegido antes de pintar la página, para que no parpadee */
+try{ var t = localStorage.getItem("rufian-theme"); if(t === "light" || t === "dark") document.documentElement.dataset.theme = t; }catch(e){}
+</script>
+<style>
+/* Concepto: hoja editorial blanca y cálida, tipografía de menú impreso; el degradado de marca aparece
+   solo como franja-firma (hero, extras, separadores). La fotografía lleva el peso; el color, el acento. */
+:root{
+  color-scheme: light;
+  /* Color — paleta del menú de Rufián */
+  --paper:#FFFEFC;
+  --paper-2:#FBF3EE;      /* blanco cálido hundido, para bandas */
+  --ink:#34415C;          /* azul grisáceo del menú */
+  --ink-soft:#5E6984;
+  --coral:#E45C5C;
+  --coral-ink:#C2413F;    /* coral con contraste AA sobre papel, para texto pequeño */
+  --rosa:#D94A9A;
+  --morado:#8953C5;
+  --naranja:#F36B32;
+  --amarillo:#F8D83D;
+  --line:#EBDCD3;
+  /* Banda oscura (bebidas destacadas, cinta) y su texto: se mantienen oscuras en ambos temas */
+  --band:#34415C;
+  --band-2:#3D4A67;
+  --on-band:#FFFEFC;
+  --on-band-soft:#C9CEDB;
+  --on-band-dim:#D5D9E3;
+  --dots:#CDB9AE;
+  --chip-bg:rgba(255,254,252,.86);
+  --shadow:rgba(52,65,92,.45);
+  --logo-light:block;   /* logotipo azul para tema claro */
+  --logo-dark:none;     /* logotipo blanco para tema oscuro */
+  --grad: linear-gradient(90deg,var(--rosa) 0%,var(--morado) 26%,var(--coral) 52%,var(--naranja) 76%,var(--amarillo) 100%);
+  --grad-extras: linear-gradient(100deg,var(--rosa),var(--coral) 55%,var(--naranja));
+
+  /* Tipo */
+  --f-display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  /* Gluten: la tipografía de Google Fonts más cercana a las letras líquidas del logo. Solo para títulos de sección. */
+  --f-title:"Gluten", "Chalkboard SE", "Comic Sans MS", system-ui, sans-serif;
+  --f-body:"Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --f-hand:"Pacifico", "Brush Script MT", cursive;
+
+  --s-hero: clamp(3.1rem, 9vw, 7.6rem);
+  --s-h2: clamp(2.1rem, 5vw, 3.6rem);
+  --s-h3: clamp(1.25rem, 2.2vw, 1.6rem);
+  --s-body: 1rem;
+  --s-small: .82rem;
+  --s-label: .72rem;
+
+  --wrap: 1240px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+/* Tema oscuro: noche de cafetería, morado-ciruela muy profundo en vez de negro puro */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --paper:#17131B; --paper-2:#211B27; --ink:#F3ECE6; --ink-soft:#B7ADBD;
+    --coral:#F0706A; --coral-ink:#F58A82; --line:#3A3141;
+    --band:#262036; --band-2:#322A44; --on-band:#FFFEFC; --on-band-soft:#C9C2D6; --on-band-dim:#DAD3E2;
+    --dots:#5C4F63; --chip-bg:rgba(33,27,39,.82); --shadow:rgba(0,0,0,.55);
+    --logo-light:none; --logo-dark:block;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#17131B; --paper-2:#211B27; --ink:#F3ECE6; --ink-soft:#B7ADBD;
+  --coral:#F0706A; --coral-ink:#F58A82; --line:#3A3141;
+  --band:#262036; --band-2:#322A44; --on-band:#FFFEFC; --on-band-soft:#C9C2D6; --on-band-dim:#DAD3E2;
+  --dots:#5C4F63; --chip-bg:rgba(33,27,39,.82); --shadow:rgba(0,0,0,.55);
+  --logo-light:none; --logo-dark:block;
+}
+.logo-l, .brand img.logo-l{display:var(--logo-light)} .logo-d, .brand img.logo-d{display:var(--logo-dark)}
+body{transition:background-color .35s ease, color .35s ease}
+html{scroll-behavior:smooth; scroll-padding-top:84px}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0;
+  background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:var(--s-body); line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+*{box-sizing:border-box}
+img{display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--morado); outline-offset:3px; border-radius:2px}
+.wrap{max-width:var(--wrap); margin-inline:auto; padding-left:var(--gutter-l); padding-right:var(--gutter-r)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:.6rem 1rem;z-index:99}
+.skip:focus{left:16px}
+
+/* ---------- etiquetas y utilidades ---------- */
+.label{font:600 var(--s-label)/1.3 var(--f-body); letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft)}
+.label--coral{color:var(--coral-ink)}
+.rule-grad{height:4px; background:var(--grad); border:0; margin:0}
+.pending{border-bottom:1.5px dotted var(--naranja); cursor:help}
+.pending-mark{font:700 .62rem/1 var(--f-body); color:var(--naranja); vertical-align:super; margin-left:2px}
+
+.btn{
+  display:inline-flex; align-items:center; gap:.6rem; min-height:48px; padding:.8rem 1.4rem;
+  font:700 .8rem/1 var(--f-body); letter-spacing:.14em; text-transform:uppercase; text-decoration:none;
+  border-radius:999px; transition:background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.btn--solid{background:var(--ink); color:var(--paper)}
+.btn--solid:hover{background:var(--coral)}
+.btn--ghost{color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn--ghost:hover{background:var(--ink); color:var(--paper)}
+.btn svg{width:16px;height:16px; transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+.link-u{text-decoration:none; background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat; transition:background-size .3s var(--ease); padding-bottom:2px}
+.link-u:hover,.link-u:focus-visible{background-size:100% 1.5px}
+
+/* ---------- espacios para fotografía ---------- */
+/* Cada <figure data-photo> se llena desde PHOTOS (script): foto, video de Instagram o, si no hay ninguno,
+   una tarjeta tipográfica de la marca (nunca un hueco ni una foto inventada). */
+.photo{position:relative; margin:0; overflow:hidden; background:var(--paper-2); max-width:100%}
+.photo img,.photo video{width:100%; height:100%; object-fit:cover; display:block}
+/* La capa .px se mueve con el scroll (parallax suave); por eso va un poco más grande que el marco */
+.photo .px{position:absolute; inset:-7% 0; will-change:transform}
+.photo .px img,.photo .px video{transition:transform .9s var(--ease)}
+.photo:hover .px img,.photo:hover .px video{transform:scale(1.035)}
+.vtoggle{position:absolute; right:10px; bottom:10px; z-index:3; width:40px; height:40px; border-radius:50%; border:0; cursor:pointer;
+  background:var(--chip-bg); color:var(--ink); display:grid; place-items:center; backdrop-filter:blur(6px)}
+.vtoggle svg{width:14px; height:14px}
+.vtag{position:absolute; left:10px; top:10px; z-index:3; font:700 .6rem/1 var(--f-body); letter-spacing:.18em; text-transform:uppercase;
+  color:#fff; background:rgba(52,65,92,.55); padding:.45rem .6rem; border-radius:999px; backdrop-filter:blur(6px)}
+/* Tarjeta tipográfica: para bebidas sin foto. Usa los colores de la bebida y sus ingredientes del menú. */
+.tc{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1rem,2.4vw,1.6rem);
+  color:#fff; overflow:hidden;
+  background:radial-gradient(110% 80% at 80% 10%, var(--tone2,var(--amarillo)) 0, transparent 55%), linear-gradient(160deg, var(--tone,var(--coral)), var(--tone3,var(--rosa)))}
+.tc__name{font:800 clamp(2rem,4.4vw,3.4rem)/.92 var(--f-title); text-wrap:balance; position:relative; z-index:1}
+.tc__chips{display:flex; flex-wrap:wrap; gap:.4rem; position:relative; z-index:1}
+.tc__chips span{font:600 .72rem/1 var(--f-body); letter-spacing:.04em; padding:.5rem .7rem; border-radius:999px; background:rgba(255,255,255,.2); backdrop-filter:blur(4px)}
+.drink--c .tc{padding:.9rem; gap:.5rem}
+.drink--c .tc__name{font-size:clamp(1.5rem,2.6vw,2.2rem)}
+.drink--c .tc__chips{gap:.3rem} .drink--c .tc__chips span{font-size:.62rem; padding:.38rem .5rem}
+.tc__cup{position:absolute; right:-6%; bottom:-4%; width:58%; opacity:.22; z-index:0}
+@media (prefers-reduced-motion: no-preference){
+  .tc__steam path{stroke-dasharray:60; animation:steam 3.6s ease-in-out infinite}
+  .tc__steam path:nth-child(2){animation-delay:.8s} .tc__steam path:nth-child(3){animation-delay:1.6s}
+}
+@keyframes steam{0%{stroke-dashoffset:60; opacity:0} 40%{opacity:1} 100%{stroke-dashoffset:-60; opacity:0}}
+
+/* ---------- header ---------- */
+.site-header{position:sticky; top:env(safe-area-inset-top,0px); z-index:50; background:color-mix(in srgb,var(--paper) 92%, transparent); backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.site-header .wrap{display:flex; align-items:center; justify-content:flex-start; gap:1rem; min-height:68px}
+.site-header .nav{margin-left:auto; order:2}
+.theme-toggle{order:3; width:44px; height:44px; flex:none; border:0; border-radius:50%; cursor:pointer; display:grid; place-items:center;
+  background:var(--paper-2); color:var(--ink); box-shadow:inset 0 0 0 1px var(--line); transition:background .25s var(--ease), transform .4s var(--ease)}
+.theme-toggle:hover{background:var(--line)}
+.theme-toggle:active{transform:rotate(-25deg) scale(.94)}
+.theme-toggle svg{width:20px; height:20px; grid-area:1/1; transition:opacity .3s, transform .45s var(--ease)}
+.theme-toggle .i-sun{opacity:0; transform:rotate(-90deg) scale(.6)}
+.theme-toggle.is-dark .i-moon{opacity:0; transform:rotate(90deg) scale(.6)}
+.theme-toggle.is-dark .i-sun{opacity:1; transform:none}
+.nav-toggle{order:4}
+.brand{display:flex; align-items:center; text-decoration:none; min-height:44px}
+.brand img{height:46px; width:auto; display:block}
+.site-header .progress{position:absolute; left:0; bottom:-1px; height:3px; width:100%; background:var(--grad); transform-origin:0 50%; transform:scaleX(var(--p,0))}
+/* Marcador provisional del logotipo: NO es el logo. Se reemplaza al definir BRAND.logo */
+.brand__ph{display:inline-flex; align-items:center; gap:.6rem; font:700 .78rem/1.1 var(--f-body); letter-spacing:.2em; text-transform:uppercase}
+.brand__ph small{font:600 .55rem/1 var(--f-body); letter-spacing:.16em; color:var(--naranja); border:1px dashed var(--naranja); border-radius:4px; padding:.3rem .4rem}
+.nav ul{display:flex; gap:clamp(1rem,2.4vw,2.2rem); list-style:none; margin:0; padding:0}
+.nav a{font:600 .74rem/1 var(--f-body); letter-spacing:.16em; text-transform:uppercase; text-decoration:none; padding:.9rem 0; display:inline-block}
+.nav a[aria-current="true"]{color:var(--coral-ink)}
+.nav-toggle{display:none; width:48px; height:48px; border:0; background:none; color:var(--ink); border-radius:50%; cursor:pointer}
+.nav-toggle span{display:block; width:22px; height:2px; background:currentColor; margin:5px auto; transition:transform .3s var(--ease), opacity .2s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width: 820px){
+  .nav-toggle{display:block}
+  .theme-toggle{margin-left:auto}
+  .nav{position:absolute; left:0; right:0; top:100%; background:var(--paper); border-bottom:1px solid var(--line);
+       padding:.5rem var(--gutter-r) 1.2rem var(--gutter-l); display:none}
+  .nav.is-open{display:block}
+  .nav ul{flex-direction:column; gap:0}
+  .nav a{display:block; padding:1rem 0; font-size:.86rem; border-bottom:1px solid var(--line)}
+  .nav li:last-child a{border-bottom:0}
+}
+
+/* ---------- hero: portada a pantalla completa ----------
+   Fotos reales que se alternan con fundido y zoom lento (Ken Burns); logo blanco grande encima;
+   velo oscuro para contraste. Igual en celular y escritorio, cambia solo la composición. */
+.hero{position:relative; isolation:isolate; overflow:hidden; color:#fff; background:#17131B;
+  min-height:min(calc(100vh - 68px), 860px); display:flex}
+@supports (height:100svh){ .hero{min-height:min(calc(100svh - 68px - env(safe-area-inset-top,0px)), 860px)} }
+.hero__slides{position:absolute; inset:0; z-index:-2}
+.hero__slide{position:absolute; inset:0; margin:0; opacity:0; transition:opacity 1.4s ease}
+.hero__slide.is-on{opacity:1}
+.hero__slide img{width:100%; height:100%; object-fit:cover; transform:scale(1.04)}
+@media (prefers-reduced-motion: no-preference){
+  .hero__slide.is-on img{animation:kenburns 7.5s ease-out forwards}
+}
+@keyframes kenburns{from{transform:scale(1.04) translate3d(0,0,0)} to{transform:scale(1.16) translate3d(var(--kx,-1.5%),var(--ky,-1%),0)}}
+/* velo: más denso a la izquierda (texto) y abajo; color de la marca muy sutil */
+.hero::before{content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(20,14,26,.86) 0%, rgba(20,14,26,.62) 38%, rgba(20,14,26,.12) 70%, rgba(20,14,26,0) 100%),
+    linear-gradient(0deg, rgba(20,14,26,.75) 0%, rgba(20,14,26,0) 38%),
+    radial-gradient(60% 70% at 0% 100%, rgba(217,74,154,.28), transparent 70%)}
+.hero__grid{position:relative; width:100%; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:2rem;
+  padding-block:clamp(2.2rem,6vh,4.5rem) clamp(2.4rem,6vh,4rem)}
+.hero__text{min-width:0; max-width:620px; display:flex; flex-direction:column}
+.hero .label{color:rgba(255,255,255,.85)}
+.hero .label--coral{color:#FFD3C7}
+.hero__logo{margin:1.2rem 0 1.4rem !important; line-height:0}
+.hero__logo img{width:clamp(250px,32vw,460px); height:auto; display:block; filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))}
+.hero__lede{max-width:40ch; font-size:clamp(1rem,1.3vw,1.15rem); color:rgba(255,255,255,.9); margin:0 0 1.8rem; text-shadow:0 1px 14px rgba(0,0,0,.4)}
+.hero__cta{display:flex; flex-wrap:wrap; gap:.8rem}
+.hero .btn--solid{background:#FFFEFC; color:#34415C}
+.hero .btn--solid:hover{background:var(--coral); color:#fff}
+.hero .btn--ghost{color:#fff; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85); backdrop-filter:blur(6px)}
+.hero .btn--ghost:hover{background:#fff; color:#34415C}
+.hero__meta{display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; margin-top:2rem}
+.hero__meta .label{color:rgba(255,255,255,.7)}
+/* Indicador de la bebida en pantalla: nombre + barras de progreso clicables */
+.hero__now{justify-self:end; display:flex; flex-direction:column; gap:.8rem; min-width:220px; max-width:280px}
+.hero__now-name{font:800 clamp(1.4rem,2.2vw,1.9rem)/1.05 var(--f-title); text-shadow:0 2px 16px rgba(0,0,0,.45); min-height:2.1em; display:flex; align-items:flex-end}
+.hero__now-name span{display:block; animation:nowIn .7s var(--ease) both}
+@keyframes nowIn{from{opacity:0; transform:translateY(12px); filter:blur(4px)} to{opacity:1; transform:none; filter:none}}
+.hero__dots{display:flex; gap:6px}
+.hero__dot{flex:1; height:30px; border:0; padding:0; background:none; cursor:pointer; position:relative}
+.hero__dot::before,.hero__dot::after{content:""; position:absolute; left:0; right:0; top:50%; height:3px; border-radius:3px; margin-top:-1.5px}
+.hero__dot::before{background:rgba(255,255,255,.3)}
+.hero__dot::after{background:#fff; transform:scaleX(0); transform-origin:0 50%}
+.hero__dot.is-done::after{transform:scaleX(1)}
+.hero__dot.is-on::after{animation:fill var(--slide-ms,6000ms) linear forwards}
+.hero.is-paused .hero__dot.is-on::after{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.hero__stripe{position:absolute; left:0; right:0; bottom:0; height:6px; background:var(--grad); z-index:2}
+.hero__scroll{position:absolute; left:50%; bottom:22px; z-index:2; width:26px; height:42px; margin-left:-13px; border-radius:14px; box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.hero__scroll::after{content:""; position:absolute; left:50%; top:8px; width:4px; height:8px; margin-left:-2px; border-radius:2px; background:#fff}
+@media (prefers-reduced-motion: no-preference){ .hero__scroll::after{animation:wheel 1.8s ease-in-out infinite} }
+@keyframes wheel{0%{opacity:0; transform:translateY(0)} 30%{opacity:1} 100%{opacity:0; transform:translateY(12px)}}
+
+/* Escritorio: fondo ciruela de la marca a la izquierda, fotos en la mitad derecha (se ven nítidas) */
+@media (min-width: 821px){
+  .hero__slides{left:auto; width:54%}
+  .hero::before{background:
+    radial-gradient(55% 80% at 8% 92%, rgba(217,74,154,.32), transparent 70%),
+    radial-gradient(40% 50% at 30% 10%, rgba(137,83,197,.22), transparent 70%),
+    linear-gradient(90deg, #17131B 0%, #17131B 44%, rgba(23,19,27,.72) 50%, rgba(23,19,27,.18) 62%, rgba(23,19,27,0) 74%),
+    linear-gradient(0deg, rgba(23,19,27,.6) 0%, rgba(23,19,27,0) 30%)}
+  .hero__scroll{display:none}
+  .hero__logo img{width:clamp(280px,30vw,470px)}
+}
+@media (max-width: 820px){
+  .hero::before{background:linear-gradient(180deg, rgba(20,14,26,.6) 0%, rgba(20,14,26,.1) 28%, rgba(20,14,26,.25) 50%, rgba(20,14,26,.88) 100%)}
+  .hero__grid{grid-template-columns:1fr; padding-block:1.4rem 2.6rem}
+  .hero__text{flex:1}
+  .hero__logo{margin:auto 0 1.2rem !important}
+  .hero__logo img{width:min(76vw,340px)}
+  .hero__meta, .hero__scroll{display:none}
+  .hero__now{justify-self:stretch; max-width:none; flex-direction:row; align-items:center; gap:1rem; order:-1; position:absolute; top:1.2rem; right:var(--gutter-r); min-width:0}
+  .hero__now-name{display:none}
+  .hero__dots{width:96px}
+  .hero__dot{height:18px}
+}
+
+/* Entrada orquestada: el logo se revela de abajo hacia arriba, luego texto y botones */
+@keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+@keyframes logoIn{from{clip-path:inset(100% 0 0 0); transform:translateY(24px) scale(.96); opacity:0} to{clip-path:inset(0 0 0 0); transform:none; opacity:1}}
+@media (prefers-reduced-motion: no-preference){
+  .hero .label{animation:rise .8s var(--ease) .1s both}
+  .hero__logo img{animation:logoIn 1.1s cubic-bezier(.16,1,.3,1) .2s both}
+  .hero__lede{animation:rise .8s var(--ease) .65s both}
+  .hero__cta{animation:rise .8s var(--ease) .8s both}
+  .hero__meta, .hero__now{animation:rise .8s var(--ease) .95s both}
+  .hero__slides{animation:heroFade 1.4s ease both}
+}
+@keyframes heroFade{from{opacity:0; transform:scale(1.06)} to{opacity:1; transform:none}}
+
+/* ---------- secciones genéricas ---------- */
+.section{padding-block:clamp(4rem,9vw,8rem)}
+.sec-head{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:1rem 2rem; margin-bottom:clamp(2rem,4vw,3.5rem)}
+.h2{font:800 var(--s-h2)/1 var(--f-title); color:var(--coral); letter-spacing:-.01em; margin:.6rem 0 0; text-wrap:balance}
+.h2--display{color:var(--ink)}
+
+/* ---------- animaciones de scroll ----------
+   El contenido es visible por defecto. Solo los bloques que están DEBAJO de la pantalla al cargar reciben .rv
+   (estado previo) y lo pierden al entrar en vista. Sin JS o con movimiento reducido, nada se oculta. */
+.rv{opacity:0; transform:translateY(34px)}
+.rv.rv--l{transform:translateX(-40px)} .rv.rv--r{transform:translateX(40px)} .rv.rv--s{transform:scale(.94)}
+@media (max-width: 820px){ .rv.rv--l, .rv.rv--r{transform:translateY(34px)} }
+main, .site-footer{overflow-x:clip}
+.photo.rv{opacity:1; transform:none; clip-path:inset(14% 10% 14% 10% round 6px)}
+.photo.rv .px img,.photo.rv .px video{transform:scale(1.18)}
+.rv-go{transition:opacity .9s var(--ease) var(--d,0s), transform .9s var(--ease) var(--d,0s), clip-path 1.1s var(--ease) var(--d,0s)}
+.rv-go .px img,.rv-go .px video{transition:transform 1.4s var(--ease) var(--d,0s)}
+
+/* Cinta de bebidas que se desplaza con el scroll */
+.ticker{overflow:hidden; background:var(--band); color:var(--on-band); padding-block:1rem; border-block:1px solid var(--band)}
+.ticker__row{display:flex; gap:2.2rem; width:max-content; white-space:nowrap; font:800 clamp(1.6rem,3.6vw,2.8rem)/1 var(--f-title); will-change:transform}
+.ticker__row span{display:inline-flex; align-items:center; gap:2.2rem}
+.ticker__row span::after{content:""; width:.45em; height:.45em; border-radius:50%; background:var(--grad)}
+.ticker--alt{background:var(--paper); color:var(--coral); border-color:var(--line)}
+
+/* Videos de Instagram: "Detrás de la barra" */
+.reels{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(10px,1.6vw,22px); align-items:start}
+.reel{margin:0; display:flex; flex-direction:column; gap:.8rem; min-width:0}
+.reel .photo{aspect-ratio:9/16; border-radius:18px}
+.reel:nth-child(2){margin-top:clamp(2rem,6vw,5rem)}
+.reel figcaption{font:600 .78rem/1.4 var(--f-body); letter-spacing:.06em; color:var(--ink-soft)}
+.reel figcaption b{display:block; font:800 1.35rem/1.1 var(--f-title); letter-spacing:0; color:var(--ink); margin-bottom:.15rem}
+@media (max-width: 820px){
+  .reels{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:.6rem; margin-inline:calc(-1 * var(--gutter-l)) calc(-1 * var(--gutter-r)); padding-inline:var(--gutter-l) var(--gutter-r); scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{flex:0 0 68%; scroll-snap-align:start}
+  .reel:nth-child(2){margin-top:0}
+}
+
+/* ---------- manifiesto ---------- */
+.manifesto{background:var(--paper-2)}
+.manifesto__grid{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:clamp(2rem,6vw,6rem); align-items:center}
+.manifesto__quote{font:800 clamp(2.2rem,5.4vw,4.4rem)/1.02 var(--f-title); color:var(--coral); letter-spacing:-.01em; margin:1rem 0 2rem; text-wrap:balance}
+.manifesto__quote span{font-style:normal; color:var(--ink)}
+.manifesto p.body{max-width:52ch; font-size:1.05rem; margin:0}
+.manifesto .photo{aspect-ratio:3/4; border-radius:999px 999px 4px 4px}
+@media (max-width: 820px){ .manifesto__grid{grid-template-columns:1fr} .manifesto .photo{max-width:340px; aspect-ratio:3/3.6} }
+
+/* ---------- galería ---------- */
+/* Collage: matcha vertical a la izquierda; latte art horizontal arriba; detalle + llamada a Instagram abajo */
+.gallery{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto; gap:clamp(8px,1.2vw,16px)}
+.gallery .photo{border-radius:3px}
+.ga{grid-column:1; grid-row:1 / 3; min-height:clamp(420px,52vw,700px)}
+.ga img{object-position:50% 40%}
+.gb{grid-column:2 / 4; grid-row:1; aspect-ratio:16/10}
+.gb img{object-position:40% 70%}
+.gc{grid-column:2; grid-row:2; aspect-ratio:1/1}
+.gc img{object-position:40% 20%}
+.gd{grid-column:3; grid-row:2; aspect-ratio:1/1; max-width:100%; border-radius:3px; background:var(--grad-extras); color:#fff; text-decoration:none;
+  display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1rem,2vw,1.6rem); transition:transform .4s var(--ease)}
+.gd:hover{transform:translateY(-3px)}
+.gd__k{font:700 .7rem/1.2 var(--f-body); letter-spacing:.2em; text-transform:uppercase}
+.gd__h{font:400 clamp(1.3rem,2.4vw,2rem)/1.05 var(--f-display); word-break:break-word}
+.gd__arrow{font:400 2rem/1 var(--f-display); align-self:flex-end}
+@media (max-width: 820px){
+  .gallery{grid-template-columns:1fr 1fr}
+  .ga{grid-column:1 / -1; grid-row:auto; min-height:0; aspect-ratio:4/5}
+  .gb{grid-column:1 / -1; grid-row:auto}
+  .gc,.gd{grid-column:auto; grid-row:auto}
+}
+
+/* ---------- experiencia ---------- */
+.exp{display:grid; gap:clamp(3rem,7vw,6rem)}
+.exp-row{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(1.5rem,5vw,5rem); align-items:center}
+.exp-row:nth-child(even) .exp-row__media{order:2}
+.exp-row__media .photo{aspect-ratio:5/4}
+.exp-row h3{font:900 var(--s-h3)/1.15 var(--f-title); color:var(--coral); margin:.6rem 0 1rem; font-size:clamp(1.6rem,3vw,2.3rem)}
+.exp-row p{max-width:48ch; margin:0 0 1rem}
+.origin{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; border-top:1px solid var(--line); padding-top:1.2rem; margin-top:1.6rem}
+.origin dt{font:600 var(--s-label)/1.3 var(--f-body); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft)}
+.origin dd{margin:.35rem 0 0; font:600 .95rem/1.3 var(--f-body)}
+.metodos-word{font:700 clamp(3rem,9vw,6.4rem)/.9 var(--f-body); letter-spacing:-.02em; color:var(--coral); margin:.4rem 0 1rem; text-transform:uppercase}
+.syrups{display:flex; flex-wrap:wrap; gap:.6rem; list-style:none; padding:0; margin:1rem 0 0}
+.syrups li{font:600 .82rem/1 var(--f-body); letter-spacing:.06em; padding:.75rem 1.1rem; border-radius:999px; box-shadow:inset 0 0 0 1.5px var(--line)}
+@media (max-width: 820px){
+  .exp-row{grid-template-columns:1fr}
+  .exp-row:nth-child(even) .exp-row__media{order:0}
+  .origin{grid-template-columns:1fr 1fr}
+}
+
+/* ---------- bebidas destacadas ---------- */
+.featured{background:var(--band); color:var(--on-band)}
+.featured .label{color:var(--on-band-soft)}
+.featured .h2{color:var(--on-band)}
+.feat{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:clamp(1rem,2.4vw,2rem)}
+.drink{min-width:0; display:flex; flex-direction:column; gap:.9rem}
+.drink .photo{background:var(--band-2); border-radius:3px}
+.drink .ph{background:
+    radial-gradient(120% 90% at 85% 10%, color-mix(in srgb,var(--tone) 55%, transparent), transparent 62%),
+    radial-gradient(90% 80% at 0% 100%, color-mix(in srgb,var(--tone2) 40%, transparent), transparent 65%),
+    repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.05) 14px 15px), var(--band-2); color:var(--on-band)}
+.drink .ph__tag{color:var(--amarillo)} .drink .ph__tag::before{background:var(--amarillo)}
+.drink .ph__hint{color:var(--on-band)} .drink .ph__file{color:var(--on-band-soft)}
+.drink__row{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; border-bottom:1px solid rgba(255,254,252,.22); padding-bottom:.7rem}
+.drink__name{font:700 1rem/1.2 var(--f-body); letter-spacing:.1em; text-transform:uppercase; margin:0}
+.drink__price{font:400 1.5rem/1 var(--f-display); font-variant-numeric:tabular-nums; white-space:nowrap}
+.drink__desc{font-size:.9rem; color:var(--on-band-dim); margin:0; max-width:40ch}
+.drink--hero{grid-column:1 / span 6; grid-row:span 2}
+.drink--hero .photo{aspect-ratio:4/5}
+.drink--hero .drink__name{font:400 clamp(1.8rem,3.4vw,2.6rem)/1 var(--f-display); letter-spacing:0; text-transform:none}
+.drink--a{grid-column:7 / span 3} .drink--b{grid-column:10 / span 3}
+.drink--a .photo,.drink--b .photo{aspect-ratio:3/4}
+.drink--c{grid-column:7 / span 6; flex-direction:row; align-items:center; gap:1.4rem}
+.drink--c .photo{flex:0 0 42%; aspect-ratio:1/1}
+.drink--c > div{flex:1; min-width:0; display:flex; flex-direction:column; gap:.9rem}
+.feat__more{margin-top:clamp(2rem,4vw,3rem); display:flex; justify-content:flex-end}
+.featured .btn--ghost{color:var(--on-band); box-shadow:inset 0 0 0 1.5px var(--on-band)}
+.featured .btn--ghost:hover{background:var(--on-band); color:var(--band)}
+@media (max-width: 900px){
+  .feat{grid-template-columns:1fr 1fr}
+  .drink--hero{grid-column:1 / -1; grid-row:auto}
+  .drink--a{grid-column:1} .drink--b{grid-column:2}
+  .drink--c{grid-column:1 / -1}
+}
+@media (max-width: 480px){
+  .drink--a,.drink--b{grid-column:1 / -1}
+  .drink--c{flex-direction:column; align-items:stretch}
+  .drink--c .photo{flex:none; aspect-ratio:4/3}
+}
+
+/* ---------- menú ---------- */
+.menu-band{height:clamp(56px,7vw,88px); background:var(--grad); display:flex; align-items:center}
+.menu-band .wrap{width:100%; display:flex; align-items:baseline; gap:1rem; color:#fff}
+.menu-band .word{font:400 clamp(2rem,4.6vw,3.4rem)/1 var(--f-display)}
+.menu-band .sub{font:700 .78rem/1 var(--f-body); letter-spacing:.3em}
+.menu-nav{position:sticky; top:calc(env(safe-area-inset-top,0px) + 68px); z-index:20; background:var(--paper); border-bottom:1px solid var(--line)}
+.menu-nav ul{display:flex; gap:.4rem; list-style:none; margin:0; padding:.7rem 0; overflow-x:auto; scrollbar-width:none}
+.menu-nav ul::-webkit-scrollbar{display:none}
+.menu-nav a{display:inline-block; white-space:nowrap; text-decoration:none; font:600 .74rem/1 var(--f-body); letter-spacing:.12em; text-transform:uppercase;
+  padding:.85rem 1rem; border-radius:999px; transition:background .25s var(--ease), color .25s var(--ease)}
+.menu-nav a:hover{background:var(--paper-2)}
+.menu-nav a.is-active{background:var(--ink); color:var(--paper)}
+.menu{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(2.5rem,6vw,6rem); padding-block:clamp(2.5rem,5vw,4rem) clamp(4rem,8vw,6rem)}
+.menu__col{display:flex; flex-direction:column; gap:clamp(2.5rem,5vw,3.5rem); min-width:0}
+.cat h3{font:900 clamp(1.8rem,3.4vw,2.5rem)/1 var(--f-title); color:var(--coral); margin:0 0 1.2rem}
+.cat h3.as-word{font:700 clamp(2.2rem,4.6vw,3.4rem)/.95 var(--f-body); letter-spacing:-.01em; text-transform:uppercase}
+.items{list-style:none; margin:0; padding:0}
+.item{padding:.8rem 0; border-bottom:1px solid var(--line)}
+.item:first-child{border-top:1px solid var(--line)}
+.item__row{display:flex; align-items:baseline; gap:.6rem}
+.item__name{font:600 .92rem/1.35 var(--f-body); letter-spacing:.08em; text-transform:uppercase; min-width:0}
+.item__dots{flex:1; min-width:1rem; border-bottom:1.5px dotted var(--dots); transform:translateY(-4px)}
+.item__price{font:600 1rem/1 var(--f-body); font-variant-numeric:tabular-nums; white-space:nowrap}
+.item__desc{font:400 .85rem/1.55 var(--f-body); color:var(--ink-soft); margin:.3rem 0 0; max-width:52ch}
+.item__note{font:500 .72rem/1.4 var(--f-body); letter-spacing:.08em; text-transform:uppercase; color:var(--coral-ink); margin:.35rem 0 0}
+.metodos p{margin:0 0 1rem; max-width:52ch}
+.metodos .ask{font:700 .8rem/1.4 var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:var(--ink)}
+.extras{background:var(--grad-extras); color:#fff; border-radius:10px; padding:clamp(1.4rem,3vw,2rem)}
+.extras h3{font:400 clamp(2rem,3.6vw,2.6rem)/1.1 var(--f-hand); color:#fff; margin:0 0 .8rem; text-transform:none}
+.extras .item{border-color:rgba(255,255,255,.4)}
+.extras .item:first-child{border-top-color:rgba(255,255,255,.4)}
+.extras .item__name{font-weight:500; letter-spacing:.04em; text-transform:none; font-size:.95rem}
+.extras .item__dots{border-color:rgba(255,255,255,.55)}
+.extras .item__price{font-weight:700}
+.menu-foot{border-top:1px solid var(--line); padding-block:1.4rem 0; font-size:var(--s-small); color:var(--ink-soft)}
+@media (max-width: 820px){ .menu{grid-template-columns:1fr} }
+
+/* ---------- instagram ---------- */
+.ig{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:clamp(2rem,5vw,5rem); align-items:center}
+.ig__handle{font:400 clamp(2rem,4.8vw,3.6rem)/1 var(--f-display); margin:.8rem 0 1.2rem; word-break:break-word}
+.ig__handle a{text-decoration:none}
+.ig--solo{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:center}
+.ig__pet{aspect-ratio:4/5; max-height:560px; border-radius:999px 999px 4px 4px}
+@media (max-width: 820px){ .ig{grid-template-columns:1fr} }
+
+/* ---------- ubicación ---------- */
+.visit{background:var(--paper-2); position:relative}
+.visit__grid{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:clamp(2rem,5vw,5rem); align-items:stretch}
+.visit address{font-style:normal; font:400 clamp(1.6rem,3.2vw,2.4rem)/1.15 var(--f-display); margin:1rem 0 1.6rem; max-width:20ch}
+.facts{display:grid; gap:0; margin:0 0 2rem}
+.facts div{display:grid; grid-template-columns:8.5rem minmax(0,1fr); gap:1rem; padding:.9rem 0; border-top:1px solid var(--line)}
+.facts dt{font:600 var(--s-label)/1.6 var(--f-body); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft)}
+.facts dd{margin:0; font-weight:500}
+.visit__links{display:flex; flex-wrap:wrap; gap:.8rem}
+.visit__media{position:relative; min-width:0; margin-right:clamp(0px,3vw,40px)}
+.visit__media > .photo{min-height:340px; height:100%; border-radius:3px}
+.visit__float{position:absolute !important; right:clamp(-40px,-3vw,-12px); bottom:-28px; width:clamp(120px,32%,210px); aspect-ratio:9/16; min-height:0 !important; height:auto !important;
+  border-radius:16px !important; box-shadow:0 0 0 6px var(--paper-2), 0 18px 34px -14px var(--shadow); z-index:2}
+@media (max-width: 820px){ .visit__grid{grid-template-columns:1fr} .visit__media{margin:0 12px 2rem 0} .visit__media > .photo{min-height:300px; aspect-ratio:4/4.6} .facts div{grid-template-columns:1fr; gap:.2rem} }
+.foot .brand img{width:130px; height:auto}
+
+/* ---------- footer ---------- */
+.site-footer{padding-block:clamp(3rem,6vw,4.5rem) 2rem}
+.foot{display:grid; grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr)); gap:2rem}
+.foot__line{font:400 clamp(1.6rem,3vw,2.2rem)/1.1 var(--f-display); margin:1rem 0 0; max-width:16ch}
+.foot__line em{color:var(--coral)}
+.foot h4{margin:0 0 .8rem}
+.foot ul{list-style:none; padding:0; margin:0; display:grid; gap:.2rem}
+.foot ul a{text-decoration:none; display:inline-block; padding:.35rem 0}
+.foot__base{display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line); font-size:var(--s-small); color:var(--ink-soft)}
+@media (max-width: 720px){ .foot{grid-template-columns:1fr 1fr} .foot > :first-child{grid-column:1 / -1} }
+
+/* ---------- Tipografía de texto: manuscrita y alargada (Caveat) ----------
+   Caveat es estrecha y escrita a mano; corre más pequeña que una letra normal, por eso todo sube de tamaño
+   y se quitan las mayúsculas con mucho espaciado, que en manuscrita se ven forzadas. */
+:root{ --s-body:1.38rem; --s-small:1.05rem; --s-label:1.1rem }
+body{line-height:1.35}
+.label{font-weight:600; letter-spacing:.04em; text-transform:none; font-size:1.15rem}
+.btn{font-weight:700; font-size:1.2rem; letter-spacing:.04em; text-transform:none}
+.nav a{font-weight:600; font-size:1.2rem; letter-spacing:.03em; text-transform:none}
+.menu-nav a{font-weight:600; font-size:1.2rem; letter-spacing:.03em; text-transform:none}
+.hero__lede{font-size:clamp(1.45rem,2vw,1.8rem); line-height:1.25; max-width:34ch}
+.hero__meta .label{font-size:1.1rem}
+.vtag,.gd__k{font-size:1rem; letter-spacing:.06em; text-transform:none}
+.tc__chips span{font-size:1.05rem; letter-spacing:.02em}
+.drink--c .tc__chips span{font-size:.95rem}
+.reel figcaption{font-size:1.15rem; letter-spacing:.02em}
+.manifesto p.body{font-size:1.5rem; line-height:1.3}
+.exp-row p{font-size:1.4rem}
+.origin dt{font-size:1rem; letter-spacing:.05em; text-transform:none}
+.origin dd{font-size:1.3rem}
+.metodos-word{text-transform:none; letter-spacing:0; font-weight:700}
+.syrups li{font-size:1.2rem; letter-spacing:.02em}
+.drink__name{font-size:1.45rem; letter-spacing:.03em; text-transform:none; font-weight:700}
+.drink__desc{font-size:1.2rem; line-height:1.25}
+.menu-band .sub{font-size:1.2rem; letter-spacing:.2em}
+.cat h3.as-word{text-transform:none; letter-spacing:0}
+.item__name{font-size:1.3rem; letter-spacing:.03em; text-transform:none; font-weight:700}
+.item__price{font-size:1.4rem; font-weight:700}
+.item__desc{font-size:1.15rem; line-height:1.25}
+.item__note{font-size:1rem; letter-spacing:.04em; text-transform:none}
+.metodos .ask{font-size:1.2rem; letter-spacing:.04em; text-transform:none}
+.extras .item__name{font-size:1.35rem}
+.facts dt{font-size:1.05rem; letter-spacing:.05em; text-transform:none}
+.facts dd{font-size:1.3rem}
+.menu-foot{font-size:1.05rem}
+.foot__base{font-size:1.05rem}
+.brand__ph{font-size:1.1rem; letter-spacing:.08em}
+
+/* ---------- Barra de navegación flotante (cápsula) ----------
+   Flota sobre la portada con vidrio esmerilado, deja ver la foto detrás y se acomoda al tema claro/oscuro.
+   En celular se reduce a logo + tema + botón, y el menú se abre como una tarjeta redondeada. */
+.site-header{position:fixed; left:0; right:0; top:calc(env(safe-area-inset-top,0px) + 12px); z-index:50; background:none; border:0;
+  backdrop-filter:none; -webkit-backdrop-filter:none; pointer-events:none}
+.site-header .wrap{pointer-events:auto; position:relative; max-width:1100px; width:calc(100% - 32px); margin-inline:auto; min-height:60px;
+  padding:6px 8px 6px 20px; gap:.6rem; border-radius:999px;
+  background:color-mix(in srgb,var(--paper) 92%, transparent);
+  -webkit-backdrop-filter:saturate(1.6) blur(18px); backdrop-filter:saturate(1.6) blur(18px);
+  box-shadow:0 14px 34px -14px var(--shadow), inset 0 0 0 1px color-mix(in srgb,var(--ink) 12%, transparent);
+  transition:background .35s ease, box-shadow .35s ease}
+.site-header.is-scrolled .wrap{background:color-mix(in srgb,var(--paper) 97%, transparent)}
+.brand img{height:38px}
+.site-header .progress{left:26px; right:26px; width:auto; bottom:2px; height:3px; border-radius:3px; opacity:.9}
+.nav ul{gap:.15rem; align-items:center}
+.nav a.link-u{background:transparent; padding:.5rem 1rem; border-radius:999px; font-size:1.28rem; line-height:1; letter-spacing:.02em;
+  transition:background-color .25s var(--ease), color .25s var(--ease)}
+.nav a.link-u:hover{background:color-mix(in srgb,var(--ink) 9%, transparent)}
+.nav a.link-u[aria-current="true"]{background:color-mix(in srgb,var(--coral) 16%, transparent); color:var(--coral-ink)}
+.nav .nav-cta a.link-u{background:var(--ink); color:var(--paper); font-weight:700; padding:.62rem 1.25rem; margin-left:.35rem}
+.nav .nav-cta a.link-u:hover{background:var(--coral); color:#fff}
+.theme-toggle{width:42px; height:42px; background:color-mix(in srgb,var(--ink) 8%, transparent); box-shadow:none}
+.theme-toggle:hover{background:color-mix(in srgb,var(--ink) 15%, transparent)}
+/* La portada ocupa toda la pantalla; el contenido se aparta de la cápsula */
+.hero{min-height:min(100vh, 900px)}
+@supports (height:100svh){ .hero{min-height:min(100svh, 900px)} }
+.hero__grid{padding-top:calc(env(safe-area-inset-top,0px) + 6.5rem)}
+.menu-nav{top:calc(env(safe-area-inset-top,0px) + 74px)}
+html{scroll-padding-top:90px}
+@media (max-width: 820px){
+  .site-header .wrap{padding:6px 8px 6px 16px; gap:.4rem}
+  .nav-toggle{width:42px; height:42px; background:color-mix(in srgb,var(--ink) 8%, transparent)}
+  .nav{top:calc(100% + 10px); left:0; right:0; padding:.7rem; border:0; border-radius:26px; background:var(--paper);
+    box-shadow:0 24px 50px -18px var(--shadow), inset 0 0 0 1px var(--line)}
+  .nav ul{gap:.2rem; align-items:stretch}
+  .nav a.link-u{display:block; text-align:center; font-size:1.5rem; padding:.8rem 1rem; border-bottom:0}
+  .nav .nav-cta a.link-u{margin:.4rem 0 0; padding:.9rem 1rem}
+  .hero__now{top:calc(env(safe-area-inset-top,0px) + 84px)}
+  .hero__grid{padding-top:calc(env(safe-area-inset-top,0px) + 5.5rem)}
+}
+@media (prefers-reduced-motion: reduce){ .nav a.link-u, .site-header .wrap{transition:none} }
+</style>
+
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="wrap">
+    <span class="progress" aria-hidden="true"></span>
+    <a class="brand" href="#inicio" data-logo aria-label="Rufián Coffee Room, inicio"></a>
+    <button class="theme-toggle" type="button" aria-label="Cambiar a tema oscuro" title="Tema claro / oscuro">
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7z" fill="currentColor"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M4.8 19.2l1.8-1.8M17.4 6.6l1.8-1.8"/></g></svg>
+    </button>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir navegación">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <ul>
+        <li><a class="link-u" href="#experiencia">La experiencia</a></li>
+        <li><a class="link-u" href="#bebidas">Bebidas</a></li>
+        <li><a class="link-u" href="#menu">Menú</a></li>
+        <li class="nav-cta"><a class="link-u" href="#ubicacion">Cómo llegar</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="inicio" aria-labelledby="hero-title" aria-roledescription="presentación">
+  <div class="hero__slides" data-slides></div>
+  <div class="wrap hero__grid">
+    <div class="hero__text">
+      <p class="label label--coral">Café de especialidad · Ensenada, B.C.</p>
+      <h1 id="hero-title" class="hero__logo"><img src="assets/brand/rufian-logo-white-640.webp" width="640" height="632" alt="Rufián Coffee Room" fetchpriority="high"></h1>
+      <p class="hero__lede">Café de especialidad de Chiapas tostado en casa, y bebidas que se atreven con naranja, yuzu, flor azul y café de olla.</p>
+      <div class="hero__cta">
+        <a class="btn btn--solid" href="#bebidas">Explorar bebidas
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn btn--ghost" href="#menu">Ver menú</a>
+      </div>
+      <div class="hero__meta">
+        <span class="label">Finca Santa Cruz · Chiapas</span>
+        <span class="label">Tostado en Rufián Roastery</span>
+        <span class="label">Pet friendly</span>
+      </div>
+    </div>
+    <div class="hero__now">
+      <p class="hero__now-name" aria-live="polite" data-now></p>
+      <div class="hero__dots" data-dots></div>
+    </div>
+  </div>
+  <a class="hero__scroll" href="#barra-title" aria-label="Bajar al contenido"></a>
+  <div class="hero__stripe" aria-hidden="true"></div>
+</section>
+
+<!-- ===================== MANIFIESTO ===================== -->
+<section class="section manifesto" aria-labelledby="manifesto-title">
+  <div class="wrap manifesto__grid">
+    <div class="reveal">
+      <p class="label">Manifiesto</p>
+      <h2 class="manifesto__quote" id="manifesto-title">No es una cafetería, es <span>un refugio.</span></h2>
+      <p class="body">Para los que buscan su café y su lugar. Cada taza empieza en una finca de Chiapas, sigue en nuestro tostador y termina frente a ti, con una pregunta: ¿cómo lo quieres hoy? Nos gusta el café bien hecho y también nos gusta jugar con él. Por eso conviven un espresso limpio y un tonic con naranja en la misma barra.</p>
+    </div>
+    <figure class="photo reveal" data-photo="manifiesto"></figure>
+  </div>
+</section>
+
+<!-- ===================== CINTA + VIDEOS ===================== -->
+<div class="ticker" aria-hidden="true"><div class="ticker__row" data-ticker="1"></div></div>
+
+<section class="section" aria-labelledby="barra-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="label">En video</p>
+        <h2 class="h2" id="barra-title">Detrás de la barra</h2>
+      </div>
+      <p style="max-width:34ch;margin:0;color:var(--ink-soft)">Del tostador a tu taza, tal como lo compartimos en Instagram.</p>
+    </div>
+    <div class="reels">
+      <figure class="reel"><div class="photo" data-photo="v_tostado"></div>
+        <figcaption><b>Tostamos en casa</b>Rufián Roastery</figcaption></figure>
+      <figure class="reel"><div class="photo" data-photo="v_latteart"></div>
+        <figcaption><b>Latte art</b>Hecho en la barra, taza por taza</figcaption></figure>
+      <figure class="reel"><div class="photo" data-photo="v_latte"></div>
+        <figcaption><b>Tu taza naranja</b>Servido para quedarte</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALERÍA ===================== -->
+<section class="section" aria-labelledby="galeria-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="label">Galería</p>
+        <h2 class="h2 h2--display" id="galeria-title">El universo Rufián</h2>
+      </div>
+      <a class="btn btn--ghost" data-ig-link href="#" target="_blank" rel="noopener">Ver en Instagram</a>
+    </div>
+    <div class="gallery">
+      <figure class="photo ga" data-photo="gal_matcha"></figure>
+      <figure class="photo gb" data-photo="gal_latteart"></figure>
+      <figure class="photo gc" data-photo="gal_vertido"></figure>
+      <a class="gd" data-ig-link href="#" target="_blank" rel="noopener">
+        <span class="gd__k">Más en Instagram</span>
+        <span class="gd__h" data-ig-handle></span>
+        <span class="gd__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCIA ===================== -->
+<section class="section" id="experiencia" aria-labelledby="exp-title" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="label">La experiencia</p>
+        <h2 class="h2" id="exp-title">Lo que pasa detrás de la barra</h2>
+      </div>
+    </div>
+    <div class="exp">
+      <article class="exp-row reveal">
+        <div class="exp-row__media"><figure class="photo" data-photo="exp_grano"></figure></div>
+        <div>
+          <p class="label">Origen</p>
+          <h3>Del cafetal de Chiapas a nuestro tostador</h3>
+          <p data-menu-text="granos"></p>
+          <dl class="origin">
+            <div><dt>Finca</dt><dd>Santa Cruz</dd></div>
+            <div><dt>Región</dt><dd>Chiapas</dd></div>
+            <div><dt>Tostado</dt><dd>Rufián Roastery</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="exp-row reveal">
+        <div class="exp-row__media"><figure class="photo" data-photo="exp_metodos"></figure></div>
+        <div>
+          <p class="label">Métodos</p>
+          <p class="metodos-word" aria-hidden="true">Métodos</p>
+          <h3 class="sr-only">Métodos</h3>
+          <p><strong>Pregunta al barista por nuestras opciones.</strong> La selección de métodos cambia, así que la mejor forma de saber qué hay hoy es preguntar en la barra.</p>
+          <a class="link-u label label--coral" href="#cat-metodos">Ver en el menú →</a>
+        </div>
+      </article>
+      <article class="exp-row reveal">
+        <div class="exp-row__media"><figure class="photo" data-photo="exp_jarabes"></figure></div>
+        <div>
+          <p class="label">Hecho en casa</p>
+          <h3>Jarabes de la casa</h3>
+          <p>Cualquier bebida se puede ajustar con uno de nuestros jarabes.</p>
+          <ul class="syrups" data-syrups></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BEBIDAS DESTACADAS ===================== -->
+<section class="section featured" id="bebidas" aria-labelledby="bebidas-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="label">Bebidas de autor</p>
+        <h2 class="h2" id="bebidas-title">Para pedir sin pensarlo dos veces</h2>
+      </div>
+    </div>
+    <div class="feat" data-featured></div>
+    <div class="feat__more"><a class="btn btn--ghost" href="#menu">Ver el menú completo</a></div>
+  </div>
+</section>
+
+<!-- ===================== MENÚ ===================== -->
+<section id="menu" aria-labelledby="menu-title">
+  <div class="menu-band">
+    <div class="wrap"><h2 class="word" id="menu-title">Menú</h2><span class="sub">BEBIDAS</span></div>
+  </div>
+  <nav class="menu-nav" aria-label="Categorías del menú">
+    <div class="wrap"><ul data-menu-nav></ul></div>
+  </nav>
+  <div class="wrap">
+    <div class="menu" data-menu></div>
+    <p class="menu-foot"><span class="pending-mark">*</span> Dato pendiente de confirmar con el establecimiento. Precios en pesos mexicanos.</p>
+  </div>
+</section>
+
+<!-- ===================== INSTAGRAM ===================== -->
+<section class="section" aria-labelledby="ig-title">
+  <div class="wrap ig ig--solo">
+    <div>
+      <p class="label">Síguenos</p>
+      <h2 class="sr-only" id="ig-title">Instagram</h2>
+      <p class="ig__handle"><a class="link-u" data-ig-link data-ig-handle href="#" target="_blank" rel="noopener"></a></p>
+      <p style="max-width:36ch;margin:0 0 1.6rem">Bebidas nuevas, ediciones especiales y lo que pasa en la barra, primero en Instagram. Y si vienes con tu perro, también es bienvenido.</p>
+      <a class="btn btn--solid" data-ig-link href="#" target="_blank" rel="noopener">Abrir Instagram
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+    </div>
+    <figure class="photo ig__pet" data-photo="pet">
+    </figure>
+  </div>
+</section>
+
+<div class="ticker ticker--alt" aria-hidden="true"><div class="ticker__row" data-ticker="-1"></div></div>
+
+<!-- ===================== UBICACIÓN ===================== -->
+<section class="section visit" id="ubicacion" aria-labelledby="visit-title">
+  <div class="wrap visit__grid">
+    <div class="reveal">
+      <p class="label label--coral">Visítanos</p>
+      <h2 class="h2" id="visit-title">Te esperamos en la barra</h2>
+      <address data-address></address>
+      <dl class="facts">
+        <div><dt>Horario</dt><dd data-hours></dd></div>
+        <div><dt>Teléfono</dt><dd data-phone></dd></div>
+        <div><dt>Mascotas</dt><dd>Pet friendly</dd></div>
+      </dl>
+      <div class="visit__links">
+        <a class="btn btn--solid" data-directions href="#" target="_blank" rel="noopener">Cómo llegar
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        <a class="btn btn--ghost" data-maps href="#" target="_blank" rel="noopener">Ficha en Google Maps</a>
+      </div>
+    </div>
+    <div class="visit__media">
+      <figure class="photo" data-photo="fachada"></figure>
+      <figure class="photo visit__float" data-photo="v_llevar"></figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="rule-grad" aria-hidden="true" style="margin-bottom:clamp(2.5rem,5vw,3.5rem)"></div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#inicio" data-logo aria-label="Rufián Coffee Room, volver al inicio"></a>
+        <p class="foot__line">Un refugio para tu café <em>y tu lugar.</em></p>
+      </div>
+      <div>
+        <h4 class="label">Navega</h4>
+        <ul>
+          <li><a class="link-u" href="#experiencia">La experiencia</a></li>
+          <li><a class="link-u" href="#bebidas">Bebidas</a></li>
+          <li><a class="link-u" href="#menu">Menú</a></li>
+          <li><a class="link-u" href="#ubicacion">Ubicación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="label">Encuéntranos</h4>
+        <ul>
+          <li><a class="link-u" data-ig-link data-ig-handle href="#" target="_blank" rel="noopener"></a></li>
+          <li><a class="link-u" data-maps href="#" target="_blank" rel="noopener">Google Maps</a></li>
+          <li data-address-short style="padding:.35rem 0"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>© <span data-year></span> Rufián Coffee Room</span>
+      <span>Ensenada, Baja California</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   DATOS CENTRALIZADOS — edita aquí y todo el sitio se actualiza.
+   ===================================================================== */
+
+const BRAND = {
+  name: "Rufián Coffee Room",
+  // Logotipo oficial (proporcionado por el negocio). Versión 512 px en assets/brand/rufian-logo-512.webp
+  // Logotipo sin el fondo degradado (letras separadas del archivo original)
+  logo: "assets/brand/rufian-logo-ink-160.webp",
+  logoLarge: "assets/brand/rufian-logo-ink-640.webp",
+  // Versiones blancas para el tema oscuro
+  logoDark: "assets/brand/rufian-logo-white-160.webp",
+  logoDarkLarge: "assets/brand/rufian-logo-white-640.webp",
+  instagram: { handle: "@rufiancoffeeroom", url: "https://www.instagram.com/rufiancoffeeroom/" },
+};
+
+const LOCATION = {
+  // Fuente: perfil de Google del negocio, consultado el 28 oct 2026.
+  street: "Blvd. Gral. Juan Zertuche 453",
+  area: "Valle Dorado, 22890",
+  city: "Ensenada, Baja California",
+  // Google: L–V 6:30–21:00, S–D 7:30–21:00. (La bio de Instagram dice "Lunes | Domingo 6:30am - 9:00pm":
+  // confirmar con el negocio cuál es el horario de fin de semana y dejar ambas fuentes iguales.)
+  hours: [["Lunes a viernes","6:30 a.m. – 9:00 p.m."],["Sábado y domingo","7:30 a.m. – 9:00 p.m."]],
+  phone: { display:"646 546 7337", tel:"+526465467337" },
+  // Enlace oficial a Maps publicado en la bio de Instagram
+  mapsProfile: "https://maps.app.goo.gl/EfJeykhSRJ7fuKdB7",
+  directions: "https://www.google.com/maps/dir/?api=1&destination=" +
+    encodeURIComponent("Rufián Coffee Room, Blvd. Gral. Juan Zertuche 453, Valle Dorado, Ensenada, B.C."),
+};
+
+/* Fotografías: src = ruta del archivo → se muestra; src = null → marcador rotulado "Foto pendiente".
+   Las fotos con src vienen de publicaciones del Instagram oficial @rufiancoffeeroom (fuente en "from").
+   pos = object-position para conservar el punto importante del encuadre. */
+const PHOTOS = {
+  hero:          { src:"assets/photos/hero-orange-tonic-espresso.webp", w:1200, h:1599, eager:true, pos:"50% 45%",
+                   alt:"Espresso vertido sobre un Orange Tonic en vaso con la mascota de Rufián, frente a un fondo morado y amarillo",
+                   from:"instagram.com/p/Da6EFJzElJR" },
+  manifiesto:    { src:"assets/photos/interior-gabinete-naranja.webp", w:1100, h:1376, pos:"45% 50%",
+                   alt:"Dos personas conversando con café en el gabinete naranja de Rufián",
+                   from:"instagram.com/p/DPZkJYwk0wp" },
+  gal_matcha:    { src:"assets/photos/matcha-barra-naranja.webp", w:900, h:1598,
+                   alt:"Bebida de matcha sobre una barra naranja de Rufián",
+                   from:"instagram.com/reel/DRbAK3lEYUV" },
+  gal_latteart:  { src:"assets/photos/latte-art-cisne.webp", w:720, h:590,
+                   alt:"Latte art en forma de cisne sobre la barra de terrazo",
+                   from:"instagram.com/reel/DdCkDWhikAZ" },
+  gal_vertido:   { src:"assets/photos/vertido-taza-naranja.webp", w:640, h:506,
+                   alt:"Taza naranja de Rufián sobre la barra de terrazo",
+                   from:"instagram.com/reel/DfC-ekEFKsz" },
+  exp_grano:     { src:"assets/photos/cerezas-cafe-cosecha.webp", w:1100, h:1467, pos:"50% 40%",
+                   alt:"Cerezas de café maduras en la planta, de la cosecha 2026 de Finca Santa Cruz",
+                   from:"instagram.com/p/DUt66aoD5TY" },
+  exp_metodos:   { src:"assets/photos/barra-latte-la-marzocco.webp", w:1000, h:1333, pos:"50% 65%",
+                   alt:"Latte con arte de corazón frente a la máquina de espresso en la barra, en blanco y negro",
+                   from:"instagram.com/p/DeaF3LCSxiz" },
+  exp_jarabes:   { src:"assets/photos/vertido-espresso-latte.webp", w:1100, h:1375, pos:"50% 45%",
+                   alt:"Espresso vertido sobre un latte frío en vaso de Rufián",
+                   from:"instagram.com/p/DO1A2s0CAs0" },
+  drink_yuzu:    { src:"assets/photos/yuzu-matcha.webp", w:1000, h:815, pos:"55% 60%",
+                   alt:"Yuzu Matcha en vaso con el logotipo de Rufián sobre la barra de terrazo",
+                   from:"instagram.com/p/DQ0R0p5ESaf" },
+  drink_orange:  { video:"assets/video/orange-coffee.mp4", poster:"assets/video/orange-coffee.webp", pos:"50% 35%",
+                   alt:"Café vertido sobre jugo de naranja con hielo (Orange Coffee)", from:"instagram.com/reel/DPwTFZ8j4Qy" },
+  /* Videos de reels del Instagram oficial, recortados a 6–8 s, sin audio, 540 px */
+  v_tostado:     { video:"assets/video/tostado-rufian-roastery.mp4", poster:"assets/video/tostado-rufian-roastery.webp", tag:"Reel",
+                   alt:"Barista tostando café en el tostador de Rufián Roastery", from:"instagram.com/reel/DbG2oqWSE3C" },
+  v_latteart:    { video:"assets/video/latte-art-barra.mp4", poster:"assets/video/latte-art-barra.webp", tag:"Reel",
+                   alt:"Barista vertiendo leche para hacer latte art en una taza naranja", from:"instagram.com/reel/DdCkDWhikAZ" },
+  v_latte:       { video:"assets/video/latte-taza-naranja.mp4", poster:"assets/video/latte-taza-naranja.webp", tag:"Reel",
+                   alt:"Latte servido en taza naranja sobre la barra de terrazo", from:"instagram.com/reel/DObRCY6jeCP" },
+  v_llevar:      { video:"assets/video/cafe-para-llevar.mp4", poster:"assets/video/cafe-para-llevar.webp",
+                   alt:"Dos cafés para llevar con el logotipo de Rufián frente a la cafetería", from:"instagram.com/reel/DPjRXDlD1iX" },
+  drink_pink:    { src:"assets/photos/pink-chai-betabel.webp", w:1100, h:1375, pos:"55% 45%",
+                   alt:"Pink Chai de betabel en vaso de Rufián sobre una mesa naranja",
+                   from:"instagram.com/p/DQPQqJpFcez" },
+  pet:           { src:"assets/photos/pet-friendly-golden.webp", w:1100, h:1375, pos:"60% 40%",
+                   alt:"Golden retriever sentado en la terraza de Rufián",
+                   from:"instagram.com/p/DOJd-T6E11m" },
+  /* Sin foto todavía: tarjeta tipográfica con los ingredientes del menú. Al tener la foto, añade src. */
+  drink_olla:    { card:{ title:"Café de Olla", chips:["Piloncillo","Ralladura de naranja","Clavo","Anís estrella","Miel","Canela","Cardamomo"] },
+                   tone:"#C2413F", tone2:"#F8D83D", tone3:"#8953C5" },
+  fachada:       { src:"assets/photos/fachada-letrero.webp", w:1100, h:1375, pos:"40% 35%",
+                   alt:"Letrero de Rufián Coffee Room sobre la fachada guinda con toldo",
+                   from:"instagram.com/p/DNqwlu-T43E" },
+};
+
+/* MENÚ — transcrito del documento "Menú". pending:true = dato por confirmar (se marca con *). */
+/* ENLACE DE LA HOJA DE GOOGLE CON EL MENÚ
+   En Google Sheets: Archivo → Compartir → Publicar en la web → pestaña «Menu» → formato «Valores separados por comas (.csv)».
+   Pega aquí el enlace que te da Google. Mientras esté vacío, el sitio usa el menú escrito abajo. */
+const MENU_SHEET_CSV = "";
+
+/* Copia de respaldo del menú: se muestra si la hoja no está configurada o no responde. */
+const MENU = {
+  cafe: { title:"Café", items:[
+    {name:"Espresso", price:"$45"}, {name:"Americano", price:"$55"}, {name:"Cortado", price:"$55"},
+    {name:"Cappuccino", price:"$60"}, {name:"Flat White", price:"$60"}, {name:"Latte", price:"$70"},
+    {name:"Mocha", price:"$75"}, {name:"Mocha Blanco", price:"$75"}, {name:"Espresso Tonic", price:"$95"},
+    {name:"Cold Brew", price:"$75"}, {name:"Cold Brew Colombia", price:"$90"},
+    {name:"Orange Coffee", price:"$100"}, {name:"Orange Tonic", price:"$100"},
+  ]},
+  notcoffee: { title:"Not Coffee", items:[
+    {name:"Chai Latte", price:"$70", desc:"Especias, vainilla, plátano, guayaba, coco, pistache y taro latte."},
+    {name:"Pink Chai Betabel", price:"$80–90", pricePending:true, desc:"Cacao, clavo, cardamomo y vainilla."},
+    {name:"Matcha Latte", price:"$90", desc:"Endulzado."},
+    {name:"Yuzu Matcha Mineral", price:"$90"},
+    {name:"Matcha Japonés", price:"$95", desc:"Matcha 100% japonés. Agua o leche. Natural o endulzado con miel."},
+    {name:"Tisana", price:"$75", descPending:true, desc:"Frutas de la pasión, Blue Eyes, guayaba, fresa kiwi, Blood Orange, té negro y té negro de cáscara de cacao, Berry Bunch."},
+    {name:"Limonada Lavanda", price:"$70"},
+    {name:"Limonada Butterfly Pea Flor Azul Honey", price:"$85"},
+    {name:"Topo Chico", price:"$40"},
+    {name:"Coca", price:"$25"},
+  ]},
+  metodos: { title:"Métodos",
+    ask:"Pregunta al barista por nuestras opciones.",
+    text:"Ofrecemos granos de la mejor calidad, producido por Finca Santa Cruz, de la región de Chiapas, por el maestro Pepe Argüello. Ganador de taza de la excelencia, el cual es tostado en Rufián Roastery.",
+    textPending:true },
+  jarabes: { title:"Jarabes de la casa", list:["Maple Sal","Vainilla","Morena","Caramelo"] },
+  extras: { title:"Extras", items:[
+    {name:"Jarabe", price:"+$20"}, {name:"Leche de avena", price:"+$30"}, {name:"Leche de almendra", price:"+$30"},
+    {name:"Extra shot", price:"+$25"}, {name:"Frío", price:"+$5"}, {name:"Cold foam vainilla", price:"+$25"},
+    {name:"Leche de nuez de la India", price:"+$30"},
+  ]},
+  especial: { title:"Bebidas Edición especial", items:[
+    {name:"Latte Nuez", price:"$95", note:"80–90F", notePending:true},
+    {name:"Latte Café de Olla", price:"$95", note:"80–90F", notePending:true,
+      desc:"Piloncillo, ralladura de naranja, clavo, anís estrella, miel, canela y cardamomo."},
+    {name:"Blue Matcha", price:"$95",
+      desc:"Latte frío o caliente de Butterfly Pea (flor azul). Se puede endulzar con miel de agave, abeja o maple."},
+  ]},
+};
+const MENU_LAYOUT = [["cafe","notcoffee"], ["metodos","jarabes","extras","especial"]];
+const MENU_NAV = [["cafe","Café"],["notcoffee","Not Coffee"],["metodos","Métodos"],["jarabes","Jarabes"],["extras","Extras"],["especial","Edición especial"]];
+
+/* Bebidas destacadas: referencias al menú (nunca precios duplicados a mano). */
+const FEATURED = [
+  { cat:"notcoffee", name:"Yuzu Matcha Mineral", photo:"drink_yuzu",   variant:"hero" },
+  { cat:"cafe",      name:"Orange Coffee",       photo:"drink_orange", variant:"a" },
+  { cat:"notcoffee", name:"Pink Chai Betabel",   photo:"drink_pink",   variant:"b" },
+  { cat:"especial",  name:"Latte Café de Olla",  photo:"drink_olla",   variant:"c" },
+];
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const PENDING = '<span class="pending-mark" aria-label="dato por confirmar">*</span>';
+const pend = (txt, on) => on ? `<span class="pending" title="Dato por confirmar con el establecimiento">${esc(txt)}</span>${PENDING}` : esc(txt);
+
+const ICON_PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" fill="currentColor"/></svg>';
+const ICON_PLAY  = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>';
+const CUP = `<svg class="tc__cup" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+  <g class="tc__steam" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M42 40c-8-10 8-14 0-26"/><path d="M60 40c-8-10 8-14 0-26"/><path d="M78 40c-8-10 8-14 0-26"/></g>
+  <path d="M24 50h68v18a34 34 0 0 1-68 0z" fill="#fff"/><path d="M92 56h6a10 10 0 0 1 0 20h-8" stroke="#fff" stroke-width="7"/></svg>`;
+
+function photoHTML(key){
+  const p = PHOTOS[key]; if(!p) return "";
+  const pos = `object-position:${p.pos||"50% 50%"}`;
+  if(p.video){
+    // preload="none" + póster: no se descarga hasta acercarse a la pantalla (ver initVideos)
+    return `<div class="px"><video muted loop playsinline preload="none" poster="${esc(p.poster)}" aria-label="${esc(p.alt)}" style="${pos}" data-src="${esc(p.video)}"></video></div>
+      ${p.tag?`<span class="vtag">${esc(p.tag)}</span>`:""}
+      <button class="vtoggle" type="button" aria-label="Pausar video">${ICON_PAUSE}</button>`;
+  }
+  if(p.src){
+    return `<div class="px"><img src="${esc(p.src)}" alt="${esc(p.alt)}" ${p.w?`width="${p.w}" height="${p.h}"`:""} ${p.eager?'fetchpriority="high"':'loading="lazy"'} decoding="async" style="${pos}"></div>`;
+  }
+  const c = p.card || { title: p.hint || "", chips: [] };
+  return `<div class="tc" style="--tone:${p.tone||"#E45C5C"};--tone2:${p.tone2||"#F8D83D"};--tone3:${p.tone3||"#D94A9A"}" role="img" aria-label="${esc(c.title)}: ${esc(c.chips.join(", "))}">
+      <span class="tc__name">${esc(c.title)}</span>
+      <span class="tc__chips">${c.chips.map(x=>`<span>${esc(x)}</span>`).join("")}</span>${CUP}
+    </div>`;
+}
+function fillPhotos(root=document){ $$("[data-photo]", root).forEach(f => f.innerHTML = photoHTML(f.dataset.photo)); }
+
+function fillBrand(){
+  $$("[data-logo]").forEach(a => {
+    const big = !!a.closest('.foot');
+    a.innerHTML = BRAND.logo
+      ? `<img class="logo-l" src="${esc(big ? BRAND.logoLarge : BRAND.logo)}" alt="${esc(BRAND.name)}" width="160" height="158">`
+      + `<img class="logo-d" src="${esc(big ? BRAND.logoDarkLarge : BRAND.logoDark)}" alt="${esc(BRAND.name)}" width="160" height="158" loading="lazy">`
+      : `<span class="brand__ph">${esc(BRAND.name)} <small title="Sustituir por el archivo original del logotipo">LOGO</small></span>`;
+  });
+  $$("[data-ig-link]").forEach(a => a.href = BRAND.instagram.url);
+  $$("[data-ig-handle]").forEach(a => a.textContent = BRAND.instagram.handle);
+}
+
+function fillLocation(){
+  const addr = $("[data-address]");
+  addr.innerHTML = `${esc(LOCATION.street)}<br>${esc(LOCATION.area)}<br>${esc(LOCATION.city)}`;
+  $("[data-hours]").innerHTML = LOCATION.hours
+    ? LOCATION.hours.map(([d,h]) => `<span style="display:block">${esc(d)} · <span style="font-variant-numeric:tabular-nums">${esc(h)}</span></span>`).join("")
+    : `Consulta el horario actualizado en la <a class="link-u" href="${esc(LOCATION.mapsProfile)}" target="_blank" rel="noopener">ficha de Google Maps</a>`;
+  const ph = LOCATION.phone;
+  $("[data-phone]").innerHTML = ph ? `<a class="link-u" href="tel:${esc(ph.tel)}" style="user-select:all">${esc(ph.display)}</a>` : "";
+  $$("[data-directions]").forEach(a => a.href = LOCATION.directions);
+  $$("[data-maps]").forEach(a => a.href = LOCATION.mapsProfile);
+  $("[data-address-short]").textContent = LOCATION.street + ", " + LOCATION.city.split(",")[0];
+}
+
+function itemHTML(it){
+  const price = it.pricePending ? pend(it.price, true) : esc(it.price);
+  return `<li class="item">
+    <div class="item__row"><span class="item__name">${esc(it.name)}</span><span class="item__dots" aria-hidden="true"></span><span class="item__price">${price}</span></div>
+    ${it.note ? `<p class="item__note">${pend(it.note, it.notePending)}</p>` : ""}
+    ${it.desc ? `<p class="item__desc">${pend(it.desc, it.descPending)}</p>` : ""}
+  </li>`;
+}
+function catHTML(key){
+  const c = MENU[key], id = `cat-${key}`;
+  if(key === "metodos") return `<section class="cat metodos" id="${id}" aria-labelledby="${id}-h">
+      <h3 class="as-word" id="${id}-h">${esc(c.title)}</h3>
+      <p class="ask">${esc(c.ask)}</p>
+      <p>${pend(c.text, c.textPending)}</p></section>`;
+  if(key === "jarabes") return `<section class="cat" id="${id}" aria-labelledby="${id}-h">
+      <h3 id="${id}-h">${esc(c.title)}</h3>
+      <ul class="syrups">${c.list.map(j=>`<li>${esc(j)}</li>`).join("")}</ul></section>`;
+  if(key === "extras") return `<section class="cat extras" id="${id}" aria-labelledby="${id}-h">
+      <h3 id="${id}-h">${esc(c.title)}</h3>
+      <ul class="items">${c.items.map(itemHTML).join("")}</ul></section>`;
+  return `<section class="cat" id="${id}" aria-labelledby="${id}-h">
+      <h3 id="${id}-h">${esc(c.title)}</h3>
+      <ul class="items">${c.items.map(itemHTML).join("")}</ul></section>`;
+}
+function fillMenu(){
+  $("[data-menu]").innerHTML = MENU_LAYOUT.map(col => `<div class="menu__col">${col.map(catHTML).join("")}</div>`).join("");
+  $("[data-menu-nav]").innerHTML = MENU_NAV.map(([k,l]) => `<li><a href="#cat-${k}" data-cat="${k}">${esc(l)}</a></li>`).join("");
+  $("[data-syrups]").innerHTML = MENU.jarabes.list.map(j=>`<li>${esc(j)}</li>`).join("");
+  $("[data-menu-text='granos']").innerHTML = pend(MENU.metodos.text, MENU.metodos.textPending);
+}
+
+function fillFeatured(){
+  $("[data-featured]").innerHTML = FEATURED.map(f => {
+    const it = MENU[f.cat].items.find(i => i.name === f.name);
+    if(!it) return "";
+    const price = it.pricePending ? `${esc(it.price)}<span class="pending-mark" aria-label="precio por confirmar">*</span>` : esc(it.price);
+    const body = `<div class="drink__row"><h3 class="drink__name">${esc(it.name)}</h3><span class="drink__price">${price}</span></div>
+      ${it.desc ? `<p class="drink__desc">${esc(it.desc)}</p>` : ""}`;
+    const fig = `<figure class="photo" data-photo="${f.photo}"></figure>`;
+    return f.variant === "c"
+      ? `<article class="drink drink--c">${fig}<div>${body}</div></article>`
+      : `<article class="drink drink--${f.variant}">${fig}${body}</article>`;
+  }).join("");
+}
+
+function initNav(){
+  const hdr = $(".site-header");
+  const onScroll = () => hdr.classList.toggle("is-scrolled", scrollY > 40);
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  const btn = $(".nav-toggle"), nav = $("#nav");
+  const close = () => { nav.classList.remove("is-open"); btn.setAttribute("aria-expanded","false"); btn.setAttribute("aria-label","Abrir navegación"); };
+  btn.addEventListener("click", () => {
+    const open = !nav.classList.contains("is-open");
+    nav.classList.toggle("is-open", open);
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "Cerrar navegación" : "Abrir navegación");
+  });
+  $$("a", nav).forEach(a => a.addEventListener("click", close));
+  document.addEventListener("keydown", e => { if(e.key === "Escape") close(); });
+
+  if(!("IntersectionObserver" in window)) return;
+  // Sección activa en la navegación principal
+  const mainLinks = $$(".nav a");
+  const secObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){
+      mainLinks.forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#"+e.target.id ? "true" : "false"));
+    }});
+  }, { rootMargin:"-45% 0px -50% 0px" });
+  ["inicio","experiencia","bebidas","menu","ubicacion"].forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+  observeCats();
+}
+
+// Categoría activa en el menú (se vuelve a llamar si el menú se actualiza desde Google Sheets)
+let catObs = null;
+function observeCats(){
+  if(!("IntersectionObserver" in window)) return;
+  catObs?.disconnect();
+  catObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){
+      const k = e.target.id.replace("cat-","");
+      $$("[data-cat]").forEach(c => c.classList.toggle("is-active", c.dataset.cat === k));
+    }});
+  }, { rootMargin:"-30% 0px -60% 0px" });
+  $$(".cat").forEach(c => catObs.observe(c));
+}
+
+/* =====================================================================
+   MENÚ DESDE GOOGLE SHEETS
+   El cliente edita la hoja; el sitio la lee al abrirse. Si la hoja no responde,
+   se queda con el menú escrito arriba (MENU), así la página nunca queda vacía.
+   ===================================================================== */
+function parseCSV(text){
+  const rows = []; let row = [], cell = "", q = false;
+  for(let i = 0; i < text.length; i++){
+    const ch = text[i];
+    if(q){ if(ch === '"'){ if(text[i+1] === '"'){ cell += '"'; i++; } else q = false; } else cell += ch; }
+    else if(ch === '"') q = true;
+    else if(ch === ",") { row.push(cell); cell = ""; }
+    else if(ch === "\n" || ch === "\r"){ if(ch === "\r" && text[i+1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += ch;
+  }
+  if(cell !== "" || row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+const norm = s => String(s||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const SHEET_CATS = { "cafe":"cafe", "not coffee":"notcoffee", "jarabes de la casa":"jarabes", "jarabes":"jarabes",
+                     "extras":"extras", "bebidas edicion especial":"especial", "edicion especial":"especial" };
+
+function menuFromSheet(csv){
+  const rows = parseCSV(csv).filter(r => r.some(c => c.trim() !== ""));
+  if(rows.length < 2) return null;
+  const head = rows[0].map(norm), col = n => head.indexOf(n);
+  const ix = { cat:col("categoria"), name:col("nombre"), price:col("precio"), desc:col("descripcion"),
+               note:col("nota"), pend:col("por_confirmar"), vis:col("visible") };
+  if(ix.cat < 0 || ix.name < 0) return null;
+  const out = { cafe:[], notcoffee:[], jarabes:[], extras:[], especial:[] };
+  let n = 0;
+  rows.slice(1).forEach(r => {
+    const get = k => ix[k] >= 0 ? (r[ix[k]] || "").trim() : "";
+    const key = SHEET_CATS[norm(get("cat"))], name = get("name");
+    if(!key || !name || norm(get("vis")) === "no") return;
+    const p = norm(get("pend"));
+    out[key].push({ name, price:get("price"), desc:get("desc") || undefined, note:get("note") || undefined,
+      pricePending:p.includes("precio"), descPending:p.includes("descrip"), notePending:p.includes("nota") });
+    n++;
+  });
+  return n >= 5 ? out : null;   // protección: una hoja casi vacía no reemplaza el menú
+}
+
+async function loadMenuSheet(){
+  if(!MENU_SHEET_CSV) return;
+  try{
+    const ctrl = new AbortController(); setTimeout(() => ctrl.abort(), 8000);
+    const res = await fetch(MENU_SHEET_CSV, { signal:ctrl.signal, cache:"no-store" });
+    if(!res.ok) throw new Error(res.status);
+    const data = menuFromSheet(await res.text());
+    if(!data) throw new Error("hoja sin datos válidos");
+    ["cafe","notcoffee","extras","especial"].forEach(k => MENU[k].items = data[k]);
+    if(data.jarabes.length) MENU.jarabes.list = data.jarabes.map(j => j.name);
+    fillMenu(); observeCats(); fillTickers(); refreshFeatured();
+  }catch(err){ console.warn("Menú: se usa la copia incluida en la página.", err); }
+}
+
+// Actualiza nombre, precio y descripción de las bebidas destacadas sin recargar sus fotos o videos
+function refreshFeatured(){
+  $$("[data-featured] .drink").forEach((el, i) => {
+    const f = FEATURED[i]; const it = f && MENU[f.cat].items.find(x => norm(x.name) === norm(f.name));
+    el.hidden = !it; if(!it) return;
+    el.querySelector(".drink__name").textContent = it.name;
+    el.querySelector(".drink__price").innerHTML = esc(it.price) + (it.pricePending ? '<span class="pending-mark" aria-label="precio por confirmar">*</span>' : "");
+    let d = el.querySelector(".drink__desc");
+    if(it.desc){ if(!d){ d = document.createElement("p"); d.className = "drink__desc"; el.querySelector(".drink__row").after(d); } d.textContent = it.desc; }
+    else d?.remove();
+  });
+}
+
+/* ---------- portada: fotos que se alternan ----------
+   Edita esta lista para cambiar las fotos de la portada. pos = punto importante de la foto. */
+const HERO_SLIDES = [
+  { src:"assets/photos/hero-orange-tonic-espresso.webp", name:"Orange Tonic", pos:"62% 40%", kx:"-2%", ky:"-1%",
+    alt:"Espresso vertido sobre un Orange Tonic con la mascota de Rufián" },
+  { src:"assets/photos/interior-gabinete-naranja.webp", name:"Tu refugio", pos:"45% 45%", kx:"1.5%", ky:"-1%",
+    alt:"Dos personas conversando con café en el gabinete naranja de Rufián" },
+  { src:"assets/photos/yuzu-matcha.webp", name:"Yuzu Matcha Mineral", pos:"55% 55%", kx:"-1%", ky:"1.5%",
+    alt:"Yuzu Matcha en vaso con el logotipo de Rufián" },
+  { src:"assets/photos/latte-art-cisne.webp", name:"Latte art", pos:"50% 60%", kx:"1%", ky:"-1.5%",
+    alt:"Latte art en forma de cisne sobre la barra de terrazo" },
+  { src:"assets/photos/pink-chai-betabel.webp", name:"Pink Chai Betabel", pos:"55% 45%", kx:"-1.5%", ky:"-1%",
+    alt:"Pink Chai de betabel sobre una mesa naranja" },
+  { src:"assets/photos/fachada-letrero.webp", name:"Blvd. Zertuche 453", pos:"40% 35%", kx:"1.5%", ky:"1%",
+    alt:"Letrero de Rufián Coffee Room sobre la fachada" },
+];
+function initHero(){
+  const box = $("[data-slides]"), dots = $("[data-dots]"), now = $("[data-now]"), hero = $(".hero");
+  const MS = 6000; hero.style.setProperty("--slide-ms", MS + "ms");
+  box.innerHTML = HERO_SLIDES.map((s,i) => `<figure class="hero__slide" aria-hidden="${i?"true":"false"}">
+      <img src="${esc(s.src)}" alt="${esc(s.alt)}" ${i?'loading="lazy"':'fetchpriority="high"'} decoding="async"
+        style="object-position:${s.pos};--kx:${s.kx};--ky:${s.ky}"></figure>`).join("");
+  dots.innerHTML = HERO_SLIDES.map((s,i) => `<button class="hero__dot" type="button" aria-label="Ver ${esc(s.name)}"></button>`).join("");
+  const slides = $$(".hero__slide", box), btns = $$(".hero__dot", dots);
+  let cur = -1, timer = null, paused = false;
+  const show = i => {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach((el,k) => { el.classList.toggle("is-on", k===cur); el.setAttribute("aria-hidden", k===cur ? "false" : "true"); });
+    btns.forEach((b,k) => { b.classList.remove("is-on"); b.classList.toggle("is-done", k < cur); });
+    void btns[cur].offsetWidth; btns[cur].classList.add("is-on");
+    now.innerHTML = `<span>${esc(HERO_SLIDES[cur].name)}</span>`;
+    // precarga la siguiente
+    const nx = slides[(cur+1) % slides.length].querySelector("img"); if(nx.loading === "lazy") nx.loading = "eager";
+    clearTimeout(timer); if(!paused && !REDUCED) timer = setTimeout(() => show(cur+1), MS);
+  };
+  btns.forEach((b,k) => b.addEventListener("click", () => show(k)));
+  // pausa cuando la portada sale de pantalla o la pestaña está oculta
+  const setPause = p => { paused = p; hero.classList.toggle("is-paused", p); clearTimeout(timer); if(!p && !REDUCED) timer = setTimeout(() => show(cur+1), MS); };
+  if("IntersectionObserver" in window) new IntersectionObserver(([e]) => setPause(!e.isIntersecting), { threshold:.2 }).observe(hero);
+  document.addEventListener("visibilitychange", () => setPause(document.hidden));
+  // deslizar con el dedo en celular
+  let x0 = null;
+  hero.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive:true });
+  hero.addEventListener("touchend", e => { if(x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); x0 = null; });
+  show(0);
+}
+
+/* ---------- tema claro / oscuro ----------
+   Por defecto sigue el ajuste del dispositivo. El botón fija una elección y la recuerda en este navegador. */
+function initTheme(){
+  const root = document.documentElement, btn = $(".theme-toggle");
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  let saved = null;
+  try { saved = localStorage.getItem("rufian-theme"); } catch(e){}
+  if(saved === "light" || saved === "dark") root.dataset.theme = saved;
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : mq.matches;
+  const sync = () => {
+    const d = isDark();
+    btn.classList.toggle("is-dark", d);
+    btn.setAttribute("aria-label", d ? "Cambiar a tema claro" : "Cambiar a tema oscuro");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", d ? "#17131B" : "#FFFEFC");
+  };
+  btn.addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("rufian-theme", next); } catch(e){}
+    sync();
+  });
+  mq.addEventListener?.("change", sync);
+  new MutationObserver(sync).observe(root, { attributes:true, attributeFilter:["data-theme"] });
+  sync();
+}
+
+/* ---------- cintas de bebidas (nombres tomados del menú) ---------- */
+function fillTickers(){
+  const names = [...MENU.cafe.items, ...MENU.notcoffee.items, ...MENU.especial.items].map(i => i.name)
+    .filter(n => !["Topo Chico","Coca","Americano","Espresso"].includes(n));
+  $$("[data-ticker]").forEach((row, k) => {
+    const list = k % 2 ? [...names].reverse() : names;
+    const html = list.map(n => `<span>${esc(n)}</span>`).join("");
+    row.innerHTML = html + html; // duplicado para que nunca quede vacío al desplazarse
+  });
+}
+
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- videos: se cargan y reproducen solo cuando están en pantalla ---------- */
+function initVideos(){
+  const vids = $$("video[data-src]");
+  const load = v => { if(!v.src){ v.src = v.dataset.src; v.preload = "auto"; } };
+  const setBtn = (v, playing) => { const b = v.closest(".photo")?.querySelector(".vtoggle"); if(!b) return;
+    b.innerHTML = playing ? ICON_PAUSE : ICON_PLAY; b.setAttribute("aria-label", playing ? "Pausar video" : "Reproducir video"); };
+  vids.forEach(v => {
+    v.addEventListener("play", () => setBtn(v, true)); v.addEventListener("pause", () => setBtn(v, false));
+    const b = v.closest(".photo")?.querySelector(".vtoggle");
+    b?.addEventListener("click", () => { v.dataset.user = v.paused ? "play" : "pause"; load(v); v.paused ? v.play().catch(()=>{}) : v.pause(); });
+    if(REDUCED) setBtn(v, false);
+  });
+  if(REDUCED || !("IntersectionObserver" in window)) { vids.forEach(v => setBtn(v,false)); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if(e.isIntersecting){ load(v); if(v.dataset.user !== "pause") v.play().catch(()=>setBtn(v,false)); }
+    else if(!v.paused) v.pause();
+  }), { rootMargin:"200px 0px", threshold:0.15 });
+  vids.forEach(v => io.observe(v));
+}
+
+/* ---------- animaciones de scroll ---------- */
+function initMotion(){
+  const header = $(".site-header");
+  if(REDUCED){ return; }
+
+  // 1) Aparición al entrar en pantalla (solo para lo que está debajo del borde al cargar)
+  const groups = [
+    [".sec-head", ""], [".manifesto__grid > div", "rv--l"], [".manifesto__grid > .photo", ""],
+    [".reel", "stagger"], [".gallery > *", "stagger"], [".exp-row > div:first-child", "rv--l"], [".exp-row > div:last-child", "rv--r"],
+    [".drink", "stagger"], [".cat", "stagger"], [".ig > *", "stagger"], [".visit__grid > div", "stagger"], [".foot > *", "stagger"],
+  ];
+  const vh = innerHeight, targets = [];
+  groups.forEach(([sel, mode]) => $$(sel).forEach((el, i) => {
+    if(el.getBoundingClientRect().top < vh * 0.92) return;
+    el.classList.add("rv"); if(mode.startsWith("rv--")) el.classList.add(mode);
+    if(mode === "stagger") el.style.setProperty("--d", `${(i % 4) * 0.09}s`);
+    targets.push(el);
+  }));
+  $$(".photo").forEach(ph => { if(ph.getBoundingClientRect().top > vh * 0.92 && !ph.closest(".rv")) { ph.classList.add("rv"); targets.push(ph); } });
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target; el.classList.add("rv-go"); requestAnimationFrame(() => el.classList.remove("rv","rv--l","rv--r","rv--s"));
+    io.unobserve(el);
+  }), { rootMargin:"0px 0px -8% 0px", threshold:0.08 });
+  targets.forEach(el => io.observe(el));
+
+  // 2) Parallax suave de las imágenes, cintas que se deslizan, logo que gira y barra de progreso
+  const layers = $$(".photo .px");
+  const tickers = $$("[data-ticker]");
+  const spin = $("[data-spin]");
+  let ticking = false;
+  const frame = () => {
+    ticking = false;
+    const y = scrollY, h = innerHeight, max = document.documentElement.scrollHeight - h;
+    header.style.setProperty("--p", max > 0 ? (y / max).toFixed(4) : 0);
+    layers.forEach(l => {
+      const r = l.parentElement.getBoundingClientRect();
+      if(r.bottom < -100 || r.top > h + 100) return;
+      const t = ((r.top + r.height/2) - h/2) / h;            // -1 … 1 aprox.
+      l.style.transform = `translate3d(0, ${(t * -6).toFixed(2)}%, 0)`;
+    });
+    tickers.forEach(t => {
+      const dir = +t.dataset.ticker, r = t.getBoundingClientRect();
+      if(r.bottom < 0 || r.top > h) return;
+      const half = t.scrollWidth / 2;
+      const off = ((y * 0.35) % half);
+      t.style.transform = `translate3d(${dir > 0 ? -off : off - half}px,0,0)`;
+    });
+    if(spin) spin.style.rotate = `${(y * 0.06).toFixed(1)}deg`;
+  };
+  const onScroll = () => { if(!ticking){ ticking = true; requestAnimationFrame(frame); } };
+  addEventListener("scroll", onScroll, { passive:true }); addEventListener("resize", onScroll);
+  frame();
+}
+
+initTheme(); initHero(); fillBrand(); fillLocation(); fillMenu(); fillFeatured(); fillPhotos(); fillTickers(); initNav(); initVideos(); initMotion();
+loadMenuSheet();
+$("[data-year]").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
